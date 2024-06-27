@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 
 class PostCard extends StatefulWidget {
   String? authorprofilepic;
-  String authorname;
-  String content;
-  String images;
+  String? authorname;
+  String? content;
+  List<dynamic> images;
   PostCard(
       {super.key,
-    required  this.authorprofilepic,
-    required  this.authorname,
-    required  this.content,
-    required  this.images});
+      required this.authorprofilepic,
+      required this.authorname,
+      required this.content,
+      this.images = const []});
 
   @override
   State<PostCard> createState() => _PostCardState();
@@ -28,28 +28,38 @@ class _PostCardState extends State<PostCard> {
           child: Container(
             margin: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width * 0.9,
-            height: 400,
+            height: 420,
             decoration: BoxDecoration(color: Colors.black),
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      (widget.authorprofilepic == null)? Icon(Icons.person):  CircleAvatar(
-                        backgroundImage:Image.network( widget.authorprofilepic!
-                        ).image,
-                        radius: 30,
-                      ),
-                      Row(
-                        children: [
-                          (widget.authorname == null)? Text('Valentine Ekwurummadu'):
-                          Text( widget.authorname,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text('. follow', style: TextStyle(color: Colors.blue))
-                        ],
+                      (widget.authorprofilepic == null)
+                          ? Icon(Icons.person)
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    Image.network(widget.authorprofilepic!)
+                                        .image,
+                                radius: 30,
+                              ),
+                            ),
+                      (widget.authorname == null)
+                          ? Text('Anonymous')
+                          : Text(
+                              widget.authorname!,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text('. follow',
+                            style: TextStyle(color: Colors.blue)),
                       ),
                     ],
                   ),
@@ -58,17 +68,24 @@ class _PostCardState extends State<PostCard> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      (widget.content == null)? Text('Be patient empires are not build in a day'):
-                      Text(widget.content,
-                        style: TextStyle(color: Colors.white),
-                      )
+                      (widget.content == null)
+                          ? Text('')
+                          : Text(
+                              widget.content!,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(color: Colors.white),
+                            )
                     ],
                   ),
                 ),
-                (widget.images == null)? Icon(Icons.account_box_rounded):
-              Image.network(height: 280,
-                    width: MediaQuery.of(context).size.width * 0.8,
-                   widget.images)
+                (widget.images.isEmpty)
+                    ? Container()
+                    : Image.network(
+                        height: 280,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        fit: BoxFit.cover,
+                        widget.images[0].toString())
               ],
             ),
           ),
