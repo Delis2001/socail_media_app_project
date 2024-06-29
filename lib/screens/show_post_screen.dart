@@ -38,6 +38,7 @@ class _ShowPostScreenState extends State<ShowPostScreen> {
                 return const Center(child: Text('No posts available'));
               } else {
                 return ListView.builder(
+                  scrollDirection: Axis.vertical,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final post = snapshot.data![index];
