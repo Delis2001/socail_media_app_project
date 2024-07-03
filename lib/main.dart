@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:socail_media_app_project/screens/backgroundScreens.dart';
+import 'package:socail_media_app_project/screens/counter_screen.dart';
 import 'package:socail_media_app_project/screens/show_post_screen.dart';
 import 'package:socail_media_app_project/screens/show_user_screen.dart';
 import 'package:socail_media_app_project/screens/splass_screen.dart';
@@ -14,10 +16,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body:   ShowPostScreen()
-      ),
+    return MaterialApp(
+      home: Backgroundchanger()
     );
   }
 }
